@@ -1,7 +1,0 @@
----
-
-ansible_network_os: ios
-ansible_user: trazanet
-ansible_password: Trazanet01
-
-...
