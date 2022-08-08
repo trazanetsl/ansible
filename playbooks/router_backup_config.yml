@@ -1,0 +1,23 @@
+---
+
+- name: Cisco show version example
+  hosts: cisco
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: backup_conf
+      cisco.ios.ios_config:
+        #src: ios_template.j2
+        backup: yes
+        
+        
+        
+    - name: Tasks done
+      debug: 
+        msg: "All tasks has been done"
+
+
+
+      
+

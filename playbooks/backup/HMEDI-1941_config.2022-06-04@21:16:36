@@ -1,0 +1,586 @@
+Building configuration...
+
+Current configuration : 16750 bytes
+!
+! Last configuration change at 10:40:47 Madrid Sat Mar 19 2022 by trazanet
+! NVRAM config last updated at 22:42:17 Madrid Tue Dec 21 2021 by trazanet
+! NVRAM config last updated at 22:42:17 Madrid Tue Dec 21 2021 by trazanet
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Hmedi
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging buffered 51200 warnings
+enable secret 4 hPDQzPc2pYtjW83r4fxyc2R3mMDGGV7./NC535ts1Y2
+!
+aaa new-model
+!
+!
+aaa authentication login vpn_xauth_ml_1 local
+aaa authorization network vpn_group_ml_1 local 
+!
+!
+!
+!
+!
+aaa session-id common
+clock timezone Madrid 1 0
+clock summer-time Madrid recurring last Sun Mar 1:00 last Sun Oct 2:00
+cef table consistency-check IPv4
+!
+ip cef
+!
+!
+!
+!
+
+
+!
+ip dhcp excluded-address 192.168.200.1 192.168.200.10
+ip dhcp excluded-address 192.168.100.1 192.168.100.100
+ip dhcp excluded-address 192.168.201.1 192.168.201.10
+ip dhcp excluded-address 192.168.202.65
+!
+ip dhcp pool 200
+ network 192.168.200.0 255.255.255.0
+ default-router 192.168.200.1 
+ dns-server 80.58.61.254 80.58.61.250 8.8.8.8 
+ lease 0 1
+!
+ip dhcp pool 100
+ network 192.168.100.0 255.255.255.0
+ default-router 192.168.100.1 
+ dns-server 80.58.61.254 80.58.61.250 192.168.100.10 
+ lease 0 1
+!
+ip dhcp pool 150CCTV
+!
+ip dhcp pool 201
+ network 192.168.201.0 255.255.255.0
+ dns-server 80.58.61.254 80.58.61.250 8.8.8.8 
+ default-router 192.168.201.1 
+ lease 0 1
+!
+ip dhcp pool 202
+ host 192.168.202.66 255.255.255.252
+ client-identifier 01c0.d2dd.5000.51
+ default-router 192.168.202.65 
+ dns-server 80.58.61.254 80.58.61.250 192.168.100.10 
+!
+!
+!
+no ip domain lookup
+ip domain name yourdomain.com
+ipv6 spd queue min-threshold 62
+ipv6 spd queue max-threshold 63
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+crypto pki trustpoint TP-self-signed-3386494079
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3386494079
+ revocation-check none
+ rsakeypair TP-self-signed-3386494079
+!
+!
+crypto pki certificate chain TP-self-signed-3386494079
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33333836 34393430 3739301E 170D3133 30353032 31343239 
+  35375A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 33383634 
+  39343037 3930819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  81008B66 7B63ACB6 10ED9413 3773B480 9F794D4B E96E9A81 A524561A FC589137 
+  3D963023 7531E0B2 A0C2B14D 40C868D3 146EF51D C19F158F 81E3BB96 353F6755 
+  7E30691A D0F37836 9811E0A0 6C7FD8FA 2F8C2352 B5A29ACE D4D897E8 DD0745B0 
+  0F37D0DD D6442A16 4E90D833 3E08106C D0259F95 A613710D E5A6F678 1E0E3147 
+  465D0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 147A916D 9A53ABA1 2E32A730 96367995 81BEFEDF 8C301D06 
+  03551D0E 04160414 7A916D9A 53ABA12E 32A73096 36799581 BEFEDF8C 300D0609 
+  2A864886 F70D0101 05050003 81810040 6EEC4F3A D74D7766 01B18981 8280ABB8 
+  ABA252BC 1AE65FFA 819134CF D1B64234 6F4B2651 7DCD6BB1 0C9995A7 04042833 
+  A7540B34 6667EE7E 13636C89 9CE27DE5 D326C539 7BF2C2E3 98463ABC 2F92D00C 
+  E88566D3 CEF3FFCB 3A3CFD15 3B2A297A D995D966 DDB23134 4367FDCA 447592C7 
+  908A0C01 8F7A8C29 309A53EC 34E839
+  	quit
+license udi pid CISCO1941/K9 sn FCZ1718C30U
+license boot module c1900 technology-package securityk9
+license boot module c1900 technology-package datak9
+!
+!
+archive
+ log config
+  logging enable
+ path flash0:
+ write-memory
+username Hmedi
+username trazanet privilege 15 secret 4 .dzZHvg2rg0ZeUxTlc5q/rE5WTOtwZc8UxWWRTyfcSk
+username sihot-mediterraneo-vpn privilege 0 secret 4 V/KphEuOKTWQgj6OFW/wvuIBKflLGpNaOWAJGXNIHBA
+username Manolo-mediterraneo-vpn secret 4 jyIfacphe00ohcHXh.PV5t0lIdVH93ZQZAlF5mavVYI
+!
+redundancy
+!
+!
+!
+!
+!
+controller VDSL 0/1/0
+!
+ip ssh maxstartups 3
+ip ssh logging events
+ip ssh version 2
+!
+class-map type inspect match-any MANAGEMENT-TRAFFIC-VNP-CMAP
+ match protocol icmp
+ match access-group 170
+class-map match-any ALL-P2P-PROTOCOLS
+ match protocol bittorrent
+ match protocol edonkey
+ match protocol gnutella
+ match protocol winmx
+ match protocol cuseeme
+ match protocol kazaa2
+ match protocol irc
+class-map type inspect match-any INTERNET-TRAFFIC-CMAP
+ match protocol icmp
+ match access-group name INTERNET-TRAFFIC
+class-map match-any Medallia-meeting
+  description Bandwidth allocation for Medallia meeting
+ match access-group name MEDALLIA-ACCESS-LIST
+!
+policy-map type inspect INTERNET-TRAFFIC-PMAP
+ class type inspect INTERNET-TRAFFIC-CMAP
+  inspect 
+ class class-default
+  drop
+policy-map MEDALLIA-BANDWIDTH-ALLOCATION-30%
+ class Medallia-meeting
+  bandwidth percent 30 
+policy-map P2P-DROP
+ class ALL-P2P-PROTOCOLS
+  drop
+policy-map type inspect MANAGEMENT-TRAFFIC-VNP-PMAP
+ class type inspect MANAGEMENT-TRAFFIC-VNP-CMAP
+  inspect 
+ class class-default
+  drop
+!
+zone security LAN
+zone security WAN
+zone security CLIENTS
+zone-pair security LAN-to-WAN source LAN destination WAN
+ service-policy type inspect INTERNET-TRAFFIC-PMAP
+zone-pair security CLIENTS-to-WAN source CLIENTS destination WAN
+ service-policy type inspect INTERNET-TRAFFIC-PMAP
+zone-pair security WAN-to-LAN source WAN destination LAN
+ service-policy type inspect MANAGEMENT-TRAFFIC-VNP-PMAP
+! 
+!
+crypto isakmp policy 10
+ encr aes 256
+ hash sha384
+ authentication pre-share
+ group 5
+!
+crypto isakmp policy 20
+ encr 3des
+ hash md5
+ authentication pre-share
+ group 2
+!
+crypto isakmp client configuration group CISCO-CLIENT-VPN
+ key {&]x=Ih%/ndSBk7g]=xJ
+ pool VPN-Pool
+ acl 170
+ max-users 5
+!
+!
+crypto ipsec transform-set 3DES-SHA esp-3des esp-sha-hmac 
+ mode tunnel
+!
+!
+!
+crypto dynamic-map VPNDYNMAP 1
+ set transform-set 3DES-SHA 
+!
+!
+crypto map MAP-OUTSIDE client authentication list vpn_xauth_ml_1
+crypto map MAP-OUTSIDE isakmp authorization list vpn_group_ml_1
+crypto map MAP-OUTSIDE client configuration address respond
+crypto map MAP-OUTSIDE 1 ipsec-isakmp dynamic VPNDYNMAP 
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description Puerto Troncal In-Stick
+ no ip address
+ ip nat inside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.100
+ description VLAN100 Administracion
+ encapsulation dot1Q 100
+ ip address 192.168.100.1 255.255.255.0
+ ip access-group vlan in
+ ip access-group 150 out
+ ip nat inside
+ ip virtual-reassembly in
+ zone-member security LAN
+ ip tcp adjust-mss 1452
+ ip policy route-map VPN-TRAFFIC-SERVER
+ ntp broadcast
+ no cdp enable
+!
+interface GigabitEthernet0/0.150
+ description Vlan150 CCTV
+ encapsulation dot1Q 150
+ ip address 192.168.150.254 255.255.255.0
+ ip access-group vlan in
+ ip access-group 150 out
+ ip nat inside
+ ip virtual-reassembly in
+ zone-member security LAN
+ ip tcp adjust-mss 1452
+ ip policy route-map MAP-MANAGEMENT-TRAFFIC-VIA-VPN
+ ntp broadcast
+ no cdp enable
+!
+interface GigabitEthernet0/0.200
+ description VLAN200 Clientes
+ encapsulation dot1Q 200
+ ip address 192.168.200.1 255.255.255.0
+ ip access-group 102 in
+ ip access-group 150 out
+ ip nat inside
+ ip virtual-reassembly in max-reassemblies 32
+ zone-member security CLIENTS
+ ip tcp adjust-mss 1452
+ ntp broadcast
+ no cdp enable
+ service-policy input P2P-DROP
+!
+interface GigabitEthernet0/0.201
+ description VLAN201 Maitre
+ encapsulation dot1Q 201
+ ip address 192.168.201.1 255.255.255.0
+ ip access-group 102 in
+ ip access-group 150 out
+ ip nat inside
+ ip virtual-reassembly in max-reassemblies 32
+ zone-member security LAN
+ ip tcp adjust-mss 1452
+ ntp broadcast
+ no cdp enable
+!
+interface GigabitEthernet0/0.202
+ description VLAN202 Tablet Sihot
+ encapsulation dot1Q 202
+ ip address 192.168.202.65 255.255.255.252
+ ip access-group vlan in
+ ip access-group 150 out
+ ip nat inside
+ ip virtual-reassembly in max-reassemblies 32
+ zone-member security LAN
+ ip tcp adjust-mss 1452
+ no cdp enable
+!
+interface GigabitEthernet0/0.300
+ description VLAN300 Management
+ encapsulation dot1Q 300
+ ip address 192.168.30.254 255.255.255.0
+ ip access-group 102 in
+ ip access-group 150 out
+ ip nat inside
+ ip virtual-reassembly in
+ zone-member security LAN
+ ip tcp adjust-mss 1452
+ ip policy route-map MAP-MANAGEMENT-TRAFFIC-VIA-VPN
+ ntp broadcast
+ no cdp enable
+!
+interface GigabitEthernet0/1
+ description Enlace para ONT Fibra Optica 1
+ no ip address
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ ip flow ingress
+ ip virtual-reassembly in
+ no ip route-cache
+ duplex auto
+ speed auto
+ no mop enabled
+!
+interface GigabitEthernet0/1.6
+ description !!!ATENCION VLAN DATOS TELEFONICA 6!!!
+ encapsulation dot1Q 6
+ ip nat outside
+ ip virtual-reassembly in
+ zone-member security WAN
+ no ip route-cache
+ pppoe enable group global
+ pppoe-client dial-pool-number 1
+!
+interface GigabitEthernet0/0/0
+ description Enlace para ONT Fibra Optica 2
+ no ip address
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
+ ip flow ingress
+ no ip route-cache
+ duplex auto
+ speed auto
+ media-type rj45
+ no mop enabled
+!
+interface GigabitEthernet0/0/0.6
+ description !!!ATENCION VLAN DATOS TELEFONICA 6!!!
+ encapsulation dot1Q 6
+ ip nat outside
+ ip virtual-reassembly in
+ zone-member security WAN
+ no ip route-cache
+ pppoe enable group global
+ pppoe-client dial-pool-number 2
+!
+interface ATM0/1/0
+ no ip address
+ ip flow ingress
+ shutdown
+ atm ilmi-keepalive
+ pvc 8/32 
+  encapsulation aal5snap
+  protocol ppp dialer
+  dialer pool-member 2
+ !
+!
+interface Ethernet0/1/0
+ no ip address
+ shutdown
+!
+interface Dialer0
+ ip address negotiated
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1420
+ ip flow ingress
+ ip nat outside
+ ip virtual-reassembly in
+ zone-member security WAN
+ encapsulation ppp
+ dialer pool 1
+ dialer-group 1
+ ppp authentication chap pap callin
+ ppp chap hostname adslppp@telefonicanetpa
+ ppp chap password 0 adslppp
+ ppp pap sent-username adslppp@telefonicanetpa password 0 adslppp
+ service-policy output MEDALLIA-BANDWIDTH-ALLOCATION-30%
+!
+interface Dialer1
+ ip address negotiated
+ ip access-group FTP-BACKPUP-MARITIM in
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1320
+ ip flow ingress
+ ip nat outside
+ ip virtual-reassembly in
+ zone-member security WAN
+ encapsulation ppp
+ dialer pool 2
+ dialer-group 2
+ ppp authentication chap pap callin
+ ppp chap hostname adslppp@telefonicanetpa
+ ppp chap password 0 adslppp
+ ppp pap sent-username adslppp@telefonicanetpa password 0 adslppp
+ crypto map MAP-OUTSIDE
+ service-policy output MEDALLIA-BANDWIDTH-ALLOCATION-30%
+!
+ip local pool VPN-Pool 10.10.10.15 10.10.10.19
+ip local policy route-map External_Management
+ip forward-protocol nd
+!
+no ip http server
+ip http authentication local
+no ip http secure-server
+!
+ip nat translation timeout 3600
+ip nat translation max-entries all-host 5000
+ip nat inside source static tcp 192.168.100.20 7002 interface Dialer1 7002
+ip nat inside source static tcp 192.168.100.9 21 interface Dialer1 21
+ip nat inside source route-map dialer0 interface Dialer0 overload
+ip nat inside source route-map dialer1 interface Dialer1 overload
+ip route 0.0.0.0 0.0.0.0 Dialer1
+ip route 0.0.0.0 0.0.0.0 Dialer0
+!
+ip access-list standard MY-SSH-POLICY
+ permit 82.7.180.138
+ permit 10.10.10.0 0.0.0.255
+ permit 192.168.100.0 0.0.0.255 log
+ permit 192.168.30.0 0.0.0.255
+ deny   any log
+!
+ip access-list extended External_Manager_Traffic
+ permit icmp host 83.56.5.199 any echo-reply
+ permit tcp host 83.56.5.199 eq 22 any
+ permit udp host 83.56.5.199 eq isakmp non500-isakmp any
+ip access-list extended FROM-SERVER-TO-VIRTUAL-TEMPLATE
+ permit ip host 192.168.100.11 10.10.10.0 0.0.0.255
+ permit ip host 192.168.100.9 any
+ip access-list extended FTP-BACKPUP-MARITIM
+ permit tcp host 212.170.168.114 host 83.56.5.199 eq ftp
+ deny   tcp any any eq ftp
+ permit ip any any
+ permit tcp any any
+ip access-list extended INTERNET-TRAFFIC
+ permit ip any any
+ remark ******ACCESS TO INTERNET*******
+ip access-list extended MANAGEMENT-NETWORK
+ permit ip 192.168.30.0 0.0.0.255 10.10.10.0 0.0.0.255
+ip access-list extended MANAGEMENT-TRAFFIC-VIA-VPN
+ permit ip 192.168.30.0 0.0.0.255 10.10.10.0 0.0.0.255
+ permit ip 192.168.150.0 0.0.0.255 10.10.10.0 0.0.0.255
+ip access-list extended MEDALLIA-ACCESS-LIST
+ permit ip 192.168.201.0 0.0.0.255 any
+ip access-list extended NAT-RULES
+ deny   ip 10.10.10.0 0.0.0.255 192.168.100.0 0.0.0.255
+ deny   ip 192.168.100.0 0.0.0.255 10.10.10.0 0.0.0.255
+ deny   ip 192.168.30.0 0.0.0.255 10.10.10.0 0.0.0.255
+ deny   ip 192.168.30.0 0.0.0.255 192.168.30.0 0.0.0.255
+ deny   ip 10.10.10.0 0.0.0.255 10.10.10.0 0.0.0.255
+ deny   ip 192.168.100.0 0.0.0.255 192.168.100.0 0.0.0.255
+ deny   ip 192.168.100.0 0.0.0.255 192.168.202.64 0.0.0.3
+ deny   ip 192.168.202.64 0.0.0.3 192.168.100.0 0.0.0.255
+ permit ip 192.168.100.0 0.0.0.255 any
+ permit ip 192.168.200.0 0.0.0.255 any
+ permit ip 192.168.202.0 0.0.0.255 any
+ permit ip 192.168.201.0 0.0.0.255 any
+ip access-list extended SERVER-II
+ permit tcp host 192.168.100.11 eq 3389 any
+ permit tcp host 192.168.100.11 eq ftp any
+ip access-list extended TRAFIC-FROM-SERVER
+ permit ip host 192.168.100.11 any
+ permit ip host 192.168.100.1 any
+ip access-list extended TTT
+ip access-list extended vlan
+ deny   ip 192.168.200.0 0.0.0.255 192.168.100.0 0.0.0.255
+ deny   ip 192.168.200.0 0.0.0.255 192.168.150.0 0.0.0.255
+ deny   ip 192.168.200.0 0.0.0.255 192.168.202.64 0.0.0.3
+ deny   ip 192.168.200.0 0.0.0.255 192.168.201.0 0.0.0.255
+ deny   ip 192.168.100.0 0.0.0.255 192.168.200.0 0.0.0.255
+ deny   ip 192.168.200.0 0.0.0.255 192.168.30.0 0.0.0.255
+ permit ip any any
+!
+access-list 30 permit 192.168.100.0 0.0.0.255
+access-list 40 permit 192.168.200.0 0.0.0.255
+access-list 102 deny   tcp any host 192.168.200.1 eq 22
+access-list 102 deny   tcp any host 192.168.201.1 eq 22
+access-list 102 deny   tcp any host 192.168.202.65 eq 22
+access-list 102 deny   tcp any host 192.168.100.1 eq 22
+access-list 102 deny   ip 192.168.200.0 0.0.0.255 192.168.30.0 0.0.0.255
+access-list 102 deny   ip 192.168.200.0 0.0.0.255 192.168.100.0 0.0.0.255
+access-list 102 deny   ip 192.168.200.0 0.0.0.255 192.168.150.0 0.0.0.255
+access-list 102 deny   ip 192.168.200.0 0.0.0.255 192.168.201.0 0.0.0.255
+access-list 102 deny   ip 192.168.200.0 0.0.0.255 192.168.202.64 0.0.0.3
+access-list 102 deny   ip 192.168.201.0 0.0.0.255 192.168.30.0 0.0.0.255
+access-list 102 deny   ip 192.168.201.0 0.0.0.255 192.168.100.64 0.0.0.3
+access-list 102 deny   ip 192.168.201.0 0.0.0.255 192.168.200.0 0.0.0.255
+access-list 102 deny   ip 192.168.201.0 0.0.0.255 192.168.150.0 0.0.0.255
+access-list 102 deny   ip 192.168.201.0 0.0.0.255 192.168.202.0 0.0.0.255
+access-list 102 permit ip any any
+access-list 150 permit ip 10.10.10.0 0.0.0.255 any
+access-list 150 deny   ip 0.0.0.0 0.255.255.255 any
+access-list 150 deny   ip 127.0.0.0 0.255.255.255 any
+access-list 150 deny   ip 172.16.0.0 0.15.255.255 any
+access-list 150 deny   ip 224.0.0.0 15.255.255.255 any
+access-list 150 deny   ip host 255.255.255.255 any
+access-list 150 permit ip any any
+access-list 170 permit ip 192.168.100.0 0.0.0.255 10.10.10.0 0.0.0.255
+access-list 170 permit ip 10.10.10.0 0.0.0.255 192.168.100.0 0.0.0.255
+access-list 170 permit ip 192.168.30.0 0.0.0.255 10.10.10.0 0.0.0.255
+access-list 170 permit ip 10.10.10.0 0.0.0.255 192.168.30.0 0.0.0.255
+access-list 170 permit ip 10.10.10.0 0.0.0.255 192.168.150.0 0.0.0.255
+access-list 170 permit ip 192.168.150.0 0.0.0.255 10.10.10.0 0.0.0.255
+!
+route-map VPN-TRAFFIC-SERVER permit 10
+ match ip address FROM-SERVER-TO-VIRTUAL-TEMPLATE
+ set interface Dialer1
+!
+route-map MANAGEMENT-NETWORK-TRAFFIC permit 10
+ match ip address MANAGEMENT-NETWORK
+ set interface Dialer1
+!
+route-map SERVER permit 10
+ match ip address TRAFIC-FROM-SERVER
+ set interface Dialer1
+!
+route-map MAP-MANAGEMENT-TRAFFIC-VIA-VPN permit 10
+ match ip address MANAGEMENT-TRAFFIC-VIA-VPN
+ set interface Dialer1
+!
+route-map dialer1 permit 10
+ match ip address NAT-RULES
+ match interface Dialer1
+!
+route-map dialer0 permit 10
+ match ip address NAT-RULES
+ match interface Dialer0
+!
+route-map External_Management permit 30
+ match ip address External_Manager_Traffic
+ set interface Dialer1
+!
+route-map TRAFFIC-3389-21-SERVER permit 10
+ match ip address SERVER-II
+ set interface Dialer1
+!
+!
+!
+!
+!
+control-plane
+!
+!
+banner motd ^C RESTRICTED DEVICE ^C
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport input all
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ access-class MY-SSH-POLICY in
+ timeout login response 300
+ privilege level 15
+ transport input ssh
+ transport output ssh
+!
+scheduler allocate 20000 1000
+ntp master
+ntp update-calendar
+ntp server 150.214.94.5
+ntp server 130.206.3.166 prefer
+!
+end
